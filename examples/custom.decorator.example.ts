@@ -1,9 +1,12 @@
 /* eslint-disable no-console */
 import { Validator } from '../src';
+import getLogger from '../src/commons/logger';
 import { addValidationRule, GenericConstraintChecker } from '../src/core';
 import { StringPropertyDecorator } from '../src/decorators';
 import { DecoratorProperty, Predicate, ValidationExchange, ValidationMetadata, ValidationOutput, ValidationRule, ValidationRuleOptions } from '../src/interfaces';
 import { buildRuleOptions } from '../src/utils';
+
+const Logger = getLogger(module);
 
 // Rule implementation
 class IsAlphaNumericValidationRule implements ValidationRule<string> {
@@ -43,11 +46,13 @@ profile.username = 'tonyStark';
 
 // Validator
 const validator = new Validator();
+Logger.info('Starting validation...');
 const [isValid, errors] = validator.validate(profile);
 
 if (!isValid) {
-    console.error('Errors => ', errors);
+    Logger.error('Errors => ', errors);
 }
+Logger.info('Validation finished');
 
 /**
  * Output
