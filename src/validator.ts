@@ -11,11 +11,12 @@ export class Validator extends LocaleResolver {
     }
 
     private searchMessage = (messageKey: string, locale?: string): string => {
+        const defaultLocale = this.getDefaultLocale();
         if (!locale) {
-            locale = this.getDefaultLocale();
+            locale = defaultLocale;
         }
-        const cacheKey = `${messageKey}-${locale}`;
 
+        const cacheKey = `${messageKey}-${locale}`;
         let message = CacheStrategy.get(cacheKey);
 
         if (message) {
@@ -28,6 +29,14 @@ export class Validator extends LocaleResolver {
         if (message) {
             CacheStrategy.put(cacheKey, message);
             return message;
+        }
+
+        const defaultMessages = this.getMessages(defaultLocale);
+        const defaultMessage = defaultMessages[messageKey];
+
+        if (defaultMessage) {
+            CacheStrategy.put(`${messageKey}-${defaultLocale}`, defaultMessage);
+            return defaultMessage;
         }
 
         throw new ValidatorError(`[${messageKey}] key not exists in message definition for locale [${this.getDefaultLocale()}]`);

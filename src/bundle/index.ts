@@ -3,6 +3,9 @@ import enMessages from './messages/en';
 import ptMessages from './messages/pt';
 import { LocaleLoaderError } from '../errors';
 import CacheStrategy from '../commons/cache.strategy';
+import getLogger from '../commons/logger';
+
+const Logger = getLogger(module);
 
 const availableLanguages = ['en', 'es', 'pt'];
 
@@ -32,28 +35,56 @@ if (!messages) {
     };
 }
 
-const loadMessages = (locale: string): { [key: string]: string } => {
-    const cacheKey = `messages-${locale}`;
-    const cachedMessages = CacheStrategy.get(cacheKey);
-    if (cachedMessages) {
-        return cachedMessages;
-    }
+const searchValidLocale = (locale: string): number => {
+    return availableLanguages.indexOf(locale);
+};
 
+const loadMessages = (locale: string): { [key: string]: string } => {
+    locale = locale.toLowerCase();
     const locales: string[] = locale.split(/-|_/) || [];
 
     if (locales.length < 1) {
         throw new LocaleLoaderError(`${locale} is not a valid format for locale`);
     }
 
+    let cacheKey = `non-messages-${locale}`;
     const language = locales[0];
-    const index = availableLanguages.indexOf(locale);
+    const indexLocale = searchValidLocale(locale);
+    const indexLanguage = searchValidLocale(language);
 
-    if (index > -1) {
+    if (indexLocale > -1) {
+        cacheKey = `messages-${locale}`;
+    } else if (indexLanguage > -1) {
+        cacheKey = `messages-${language}`;
+    }
+
+    const cachedMessages = CacheStrategy.get(cacheKey);
+    if (cachedMessages) {
+        return cachedMessages;
+    }
+
+    if (indexLocale > -1) {
+        CacheStrategy.put(cacheKey, messages[locale]);
+        return messages[locale] || {};
+    } else if (indexLanguage > -1) {
+        Logger.warn(`Locale [${locale}] not recognized, trying to get the language [${language}]`);
         CacheStrategy.put(cacheKey, messages[language]);
         return messages[language] || {};
     }
 
-    throw new LocaleLoaderError(`Language ${locales[0]} is not supported. Choose one from available languages: ${availableLanguages}`);
+    throw new LocaleLoaderError(`Language ${locale} is not supported. Choose one from available languages: ${availableLanguages}`);
+};
+
+const addMessages = (locale: string, bundle: { [key: string]: string }) => {
+    locale = locale.toLowerCase();
+    const index = availableLanguages.indexOf(locale);
+    if (index > -1) {
+        availableLanguages.splice(index, 1, locale);
+    } else {
+        availableLanguages.push(locale);
+    }
+
+    messages[locale] = bundle;
 };
 
 declare global {
@@ -69,4 +100,4 @@ String.prototype.supplant = function (o: object) {
     });
 };
 
-export default loadMessages;
+export { addMessages, loadMessages };
