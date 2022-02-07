@@ -1,0 +1,45 @@
+{
+    "name": "international-v8thor",
+    "version": "1.0.0",
+    "description": "Library for international validations and supports locale",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "scripts": {
+        "build": "npx tsc",
+        "lint": "eslint . --ext .ts",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "start": "ts-node src/index.ts"
+    },
+    "author": "Erick Barrera",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/erbalo/internation-v8thor"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.10",
+        "@typescript-eslint/eslint-plugin": "^5.10.0",
+        "@typescript-eslint/parser": "^5.10.0",
+        "eslint": "^8.7.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "^2.5.1",
+        "reflect-metadata": "^0.1.13",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.5",
+        "winston": "^3.4.0",
+        "@types/memory-cache": "^0.2.1",
+        "class-transformer": "^0.5.1",
+        "memory-cache": "^0.2.0"
+    },
+    "keywords": [
+        "typescript",
+        "i18n",
+        "class-validator",
+        "multi-language",
+        "decorators"
+    ],
+    "files": [
+        "lib/**/*"
+    ]
+}

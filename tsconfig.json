@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        /* Experimental Options */
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        /* Advanced Options */
+        "forceConsistentCasingInFileNames": true,
+        "module": "commonjs",
+        "target": "ES6",
+        "outDir": "lib",
+        "rootDir": "src",
+        "allowJs": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "declaration": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "examples",
+        "node_modules",
+        "**/__tests__/*"
+    ]
+}
