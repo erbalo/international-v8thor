@@ -1,9 +1,12 @@
 coverage
 examples
 src
+test
 tsconfig.json
+jest.config.ts
 .eslintrc.json
 .eslintignore
 .prettierrc.json
 .editorconfig
 .vscode
+.github
