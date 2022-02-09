@@ -1,6 +1,6 @@
 {
     "name": "international-v8thor",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Library for international validations and supports locale",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -16,7 +16,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/erbalo/internation-v8thor"
+        "url": "git+https://github.com/erbalo/international-v8thor"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",
