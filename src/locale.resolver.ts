@@ -1,9 +1,13 @@
 import { addMessages, loadMessages } from './bundle';
+import { LocaleLoaderError } from './errors';
 
 class LocaleResolver {
     private defaultLocale: string;
 
     constructor(defaultLocale = 'en') {
+        if (!defaultLocale) {
+            throw new LocaleLoaderError('Locale should not be null');
+        }
         this.defaultLocale = defaultLocale.toLowerCase();
     }
 

@@ -1,7 +1,9 @@
+coverage
+examples
 src
 tsconfig.json
 .eslintrc.json
 .eslintignore
 .prettierrc.json
 .editorconfig
-examples
+.vscode
