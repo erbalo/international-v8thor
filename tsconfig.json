@@ -17,15 +17,17 @@
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
         "types": [
-            "node"
+            "node",
+            "jest"
         ]
     },
     "include": [
         "src"
     ],
     "exclude": [
+        "coverage",
         "examples",
         "node_modules",
-        "**/__tests__/*"
+        "test"
     ]
 }

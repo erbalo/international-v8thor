@@ -40,6 +40,10 @@ const searchValidLocale = (locale: string): number => {
 };
 
 const loadMessages = (locale: string): { [key: string]: string } => {
+    if (!locale) {
+        throw new LocaleLoaderError('Locale should not be null');
+    }
+
     locale = locale.toLowerCase();
     const locales: string[] = locale.split(/-|_/) || [];
 

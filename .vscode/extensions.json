@@ -6,6 +6,7 @@
         "ms-azuretools.vscode-docker",
         "vscode-icons-team.vscode-icons",
         "dracula-theme.theme-dracula",
-        "mikestead.dotenv"
+        "mikestead.dotenv",
+        "techer.open-in-browser"
     ]
 }
