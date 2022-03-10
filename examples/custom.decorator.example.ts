@@ -28,7 +28,7 @@ const IsAlphaNumeric = (properties?: DecoratorProperty): StringPropertyDecorator
     return function (target: unknown, key: string) {
         const rule = IsAlphaNumericValidationRule.instance;
         // general key, is a default message from the loaded bundle, but you can pass a custom message directly
-        const ruleOptions: ValidationRuleOptions<string> = buildRuleOptions(rule, 'general', null, properties);
+        const ruleOptions: ValidationRuleOptions<string> = buildRuleOptions(rule, 'alphanumeric', null, properties);
 
         // Registers the target with the validation rule
         addValidationRule(target, key, ruleOptions);
@@ -46,8 +46,16 @@ profile.username = 'tonyStark';
 
 // Validator
 const validator = new Validator();
+validator.addMessages('en', {
+    alphanumeric: '{property} this field is not valid',
+});
+
+validator.addMessages('pt', {
+    alphanumeric: '{property} this field is not valid pt',
+});
+
 Logger.info('Starting validation...');
-const [isValid, errors] = validator.validate(profile);
+const [isValid, errors] = validator.validate(profile, 'pt');
 
 if (!isValid) {
     Logger.error('Errors => ', errors);

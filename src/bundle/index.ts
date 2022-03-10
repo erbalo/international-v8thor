@@ -79,7 +79,7 @@ const loadMessages = (locale: string): { [key: string]: string } => {
     throw new LocaleLoaderError(`Language ${locale} is not supported. Choose one from available languages: ${availableLanguages}`);
 };
 
-const addMessages = (locale: string, bundle: { [key: string]: string }) => {
+const addMessages = (locale: string, msgs: { [key: string]: string }) => {
     locale = locale.toLowerCase();
     const index = availableLanguages.indexOf(locale);
     if (index > -1) {
@@ -88,9 +88,13 @@ const addMessages = (locale: string, bundle: { [key: string]: string }) => {
         availableLanguages.push(locale);
     }
 
-    messages[locale] = bundle;
+    const bundle = messages[locale];
+    const newMessages = {
+        ...bundle,
+        ...msgs,
+    };
+    messages[locale] = newMessages;
 };
-
 declare global {
     interface String {
         supplant(o: object): string;

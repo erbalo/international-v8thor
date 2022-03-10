@@ -11,7 +11,7 @@ class LocaleResolver {
         this.defaultLocale = defaultLocale.toLowerCase();
     }
 
-    addBundle = (locale: string, bundle: { [key: string]: string }) => {
+    addMessages = (locale: string, bundle: { [key: string]: string }) => {
         addMessages(locale, bundle);
     };
 
