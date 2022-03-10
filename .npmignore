@@ -1,7 +1,7 @@
 coverage
 examples
 src
-test
+tests
 tsconfig.json
 jest.config.ts
 .eslintrc.json
